@@ -1,2 +1,3 @@
 # mrs_statistics
 R codes for processing MRS.
+This project is to help openmrs project analyse mrs data using statistics...
