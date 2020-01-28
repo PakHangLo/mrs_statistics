@@ -30,6 +30,7 @@ X1<-c(1,1,0,0,0,0,0,0,-1,-1)
 X2<-c(0,0,1,1,1,0,0,0,-1,-1)
 X3<-c(0,0,0,0,0,1,1,1,-1,-1)
 
+##create a new data frame
 data_ex4<-data.frame(sales=sales,X0=rep(1,times=10),X1=X1,X2=X2,X3=X3)
 
 model_ex4<-lm(formula = data_ex4$sales ~ data_ex4$X1+data_ex4$X2+data_ex4$X3, data = data_ex4)
