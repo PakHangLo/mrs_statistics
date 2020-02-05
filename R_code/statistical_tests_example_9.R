@@ -47,9 +47,6 @@ colMeans_data<-colMeans(data[,6:8])
 H<-n1 * (colMeans_g1-colMeans_data) %*% t(colMeans_g1-colMeans_data)+
 n2 * (colMeans_g2-colMeans_data) %*% t(colMeans_g2-colMeans_data)
 
-#colMeans_g1_rep<-data.frame(colMeans_g1)
-#colMeans_g1_rep<-t(colMeans_g1_rep)
-#g1[,1:4]-colMeans_g1_rep[rep(seq_len(nrow(colMeans_g1_rep)),each=5),]
 
 A<-data[,6:8]
 B<-as.numeric(unlist(A))
@@ -68,9 +65,9 @@ E[,,i]<-C[,,i]%*%t(D[,,i])
 colSums_g1<-colSums(g1[,6:8])
 colSums_g2<-colSums(g2[,6:8])
 
-F<-apply(E,MARGIN=c(1,2),sum)-1/n1*colSums_g1%*%t(colSums_g1)-
+E<-apply(E,MARGIN=c(1,2),sum)-1/n1*colSums_g1%*%t(colSums_g1)-
 1/n2*colSums_g2%*%t(colSums_g2)
-G<-solve(F)%*%H
+G<-solve(E)%*%H
 
 y<-eigen(G)
 y$val
@@ -78,25 +75,25 @@ y$val
 #compute the confidence intervals of the difference of GABAA_diff1 between male and femaleat time 1
 #set alpha (significance level) to be 0.05
 a<-c(1,0,0)
-colMeans_g1[1]-colMeans_g2[1]+qt(0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
-colMeans_g1[1]-colMeans_g2[1]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
+colMeans_g1[1]-colMeans_g2[1]+qt(0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
+colMeans_g1[1]-colMeans_g2[1]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
 
 
 #compute the confidence intervals of the difference of GABAA_diff2 between male and female at time 2
 #set alpha (significance level) to be 0.05
 a<-c(1,0,0)
-colMeans_g1[2]-colMeans_g2[2]+qt(0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
-colMeans_g1[2]-colMeans_g2[2]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
+colMeans_g1[2]-colMeans_g2[2]+qt(0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
+colMeans_g1[2]-colMeans_g2[2]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
 
 #compute the confidence intervals of the difference of GABAA_diff3 between male and female at time 3
 #set alpha (significance level) to be 0.05
 a<-c(1,0,0)
-colMeans_g1[3]-colMeans_g2[3]+qt(0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
-colMeans_g1[3]-colMeans_g2[3]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
+colMeans_g1[3]-colMeans_g2[3]+qt(0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
+colMeans_g1[3]-colMeans_g2[3]+qt(1-0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
 
 
 #compute the confidence intervals of difference of average GABAA_diff for those 3 time points between male and female
 #set alpha (significance level) to be 0.05
 a<-c(1/3,1/3,1/3)
-1/3*(colMeans_g1[1]+colMeans_g1[2]+colMeans_g1[3])-1/3*(colMeans_g2[1]+colMeans_g2[2]+colMeans_g2[3])+qt(0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
-1/3*(colMeans_g1[1]+colMeans_g1[2]+colMeans_g1[3])-1/3*(colMeans_g2[1]+colMeans_g2[2]+colMeans_g2[3])+qt(1-0.05/2,6-2)*sqrt(t(a)%*%F%*%a/(6-2)*2/3)
+1/3*(colMeans_g1[1]+colMeans_g1[2]+colMeans_g1[3])-1/3*(colMeans_g2[1]+colMeans_g2[2]+colMeans_g2[3])+qt(0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
+1/3*(colMeans_g1[1]+colMeans_g1[2]+colMeans_g1[3])-1/3*(colMeans_g2[1]+colMeans_g2[2]+colMeans_g2[3])+qt(1-0.05/2,6-2)*sqrt(t(a)%*%E%*%a/(6-2)*2/3)
